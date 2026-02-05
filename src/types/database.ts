@@ -253,3 +253,36 @@ export interface Database {
     };
   };
 }
+
+// Convenience type aliases for table rows
+export type User = Database["public"]["Tables"]["users"]["Row"];
+export type Entity = Database["public"]["Tables"]["entities"]["Row"];
+export type Event = Database["public"]["Tables"]["events"]["Row"];
+export type EventHost = Database["public"]["Tables"]["event_hosts"]["Row"];
+export type Rsvp = Database["public"]["Tables"]["rsvps"]["Row"];
+export type Save = Database["public"]["Tables"]["saves"]["Row"];
+export type Follow = Database["public"]["Tables"]["follows"]["Row"];
+export type Update = Database["public"]["Tables"]["updates"]["Row"];
+export type Message = Database["public"]["Tables"]["messages"]["Row"];
+
+// Convenience type aliases for inserts
+export type UserInsert = Database["public"]["Tables"]["users"]["Insert"];
+export type EntityInsert = Database["public"]["Tables"]["entities"]["Insert"];
+export type EventInsert = Database["public"]["Tables"]["events"]["Insert"];
+export type EventHostInsert = Database["public"]["Tables"]["event_hosts"]["Insert"];
+export type RsvpInsert = Database["public"]["Tables"]["rsvps"]["Insert"];
+export type SaveInsert = Database["public"]["Tables"]["saves"]["Insert"];
+export type FollowInsert = Database["public"]["Tables"]["follows"]["Insert"];
+export type UpdateInsert = Database["public"]["Tables"]["updates"]["Insert"];
+export type MessageInsert = Database["public"]["Tables"]["messages"]["Insert"];
+
+// Convenience type aliases for updates
+export type UserUpdate = Database["public"]["Tables"]["users"]["Update"];
+export type EntityUpdate = Database["public"]["Tables"]["entities"]["Update"];
+export type EventUpdate = Database["public"]["Tables"]["events"]["Update"];
+export type EventHostUpdate = Database["public"]["Tables"]["event_hosts"]["Update"];
+export type RsvpUpdate = Database["public"]["Tables"]["rsvps"]["Update"];
+export type SaveUpdate = Database["public"]["Tables"]["saves"]["Update"];
+export type FollowUpdate = Database["public"]["Tables"]["follows"]["Update"];
+export type UpdateUpdate = Database["public"]["Tables"]["updates"]["Update"];
+export type MessageUpdate = Database["public"]["Tables"]["messages"]["Update"];
