@@ -385,13 +385,13 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 0: Project Setup (Both Tracks)
-**Time estimate:** 15 minutes
+**Time estimate:** 15 minutes — ✅ COMPLETE
 
-- [ ] Initialize Next.js 14 project with App Router
-- [ ] Install dependencies: `@mui/material`, `@emotion/react`, `@emotion/styled`, `@supabase/supabase-js`, `@supabase/ssr`, `leaflet`, `react-leaflet`
-- [ ] Set up Supabase project, get API keys
-- [ ] Configure environment variables
-- [ ] Set up basic folder structure
+- [x] Initialize Next.js 14 project with App Router
+- [x] Install dependencies: `@mui/material`, `@emotion/react`, `@emotion/styled`, `@supabase/supabase-js`, `@supabase/ssr`, `leaflet`, `react-leaflet`
+- [x] Set up Supabase project, get API keys
+- [x] Configure environment variables
+- [x] Set up basic folder structure
 
 ```
 /app
@@ -420,11 +420,11 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 1: Database Schema (Server Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] Enable PostGIS extension in Supabase
-- [ ] Create all tables per data model spec
-- [ ] Set up Row Level Security policies:
+- [x] Enable PostGIS extension in Supabase
+- [x] Create all tables per data model spec
+- [x] Set up Row Level Security policies:
   - `users`: users can read/update own row
   - `entities`: public read, admin can update own
   - `events`: public read, host admins can update
@@ -432,8 +432,9 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
   - `saves`: users can manage own
   - `follows`: users can manage own
   - `updates`: public read, host admins can create
-- [ ] Create indexes on `events.location`, `events.starts_at`, `events.tags`
-- [ ] Seed with test data (2-3 entities, 5-10 events)
+- [x] Create indexes on `events.location`, `events.starts_at`, `events.tags`
+- [x] Seed with test data (2-3 entities, 5-10 events)
+- [x] Generate TypeScript types (`/types/database.ts`) with full relationship definitions
 
 ---
 
@@ -477,17 +478,17 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 5: Event API (Server Track)
-**Time estimate:** 45 minutes
+**Time estimate:** 45 minutes — ✅ COMPLETE
 
-- [ ] `GET /api/events` with geo-filtering (PostGIS `ST_DWithin`)
-- [ ] `GET /api/events/[slug]` with hosts and updates
-- [ ] `POST /api/events` with auto-host linking
-- [ ] `PATCH /api/events/[slug]` with auto-changelog generation
-- [ ] `DELETE /api/events/[slug]`
-- [ ] `POST /api/events/[slug]/rsvp`
-- [ ] `POST /api/events/[slug]/save`
-- [ ] `POST /api/events/[slug]/updates`
-- [ ] `POST /api/events/[slug]/contact`
+- [x] `GET /api/events` with geo-filtering (PostGIS `ST_DWithin`)
+- [x] `GET /api/events/[slug]` with hosts and updates
+- [x] `POST /api/events` with auto-host linking
+- [x] `PATCH /api/events/[slug]` with auto-changelog generation
+- [x] `DELETE /api/events/[slug]`
+- [x] `POST /api/events/[slug]/rsvp`
+- [x] `POST /api/events/[slug]/save`
+- [x] `POST /api/events/[slug]/updates`
+- [x] `POST /api/events/[slug]/contact`
 
 ---
 
@@ -503,13 +504,13 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 7: Entity API (Server Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] `GET /api/entities`
-- [ ] `GET /api/entities/[slug]` with events
-- [ ] `POST /api/entities`
-- [ ] `PATCH /api/entities/[slug]`
-- [ ] `POST /api/entities/[slug]/follow`
+- [x] `GET /api/entities`
+- [x] `GET /api/entities/[slug]` with events
+- [x] `POST /api/entities`
+- [x] `PATCH /api/entities/[slug]`
+- [x] `POST /api/entities/[slug]/follow`
 
 ---
 
@@ -539,11 +540,11 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 10: Search (Both Tracks)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — 🟡 SERVER COMPLETE
 
-**Server:**
-- [ ] `GET /api/search` with Postgres full-text search on events + entities
-- [ ] Filter by tags, date range, location radius
+**Server:** ✅
+- [x] `GET /api/search` with Postgres full-text search on events + entities
+- [x] Filter by tags, date range, location radius
 
 **Client:**
 - [ ] Search bar in header
@@ -574,23 +575,26 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 
 ## Summary: Time Estimates
 
-| Milestone | Track | Time |
-|-----------|-------|------|
-| M0: Setup | Both | 15 min |
-| M1: Database | Server | 30 min |
-| M2: Auth | Client | 30 min |
-| M3: Map | Client | 60 min |
-| M4: Event/Entity Pages | Client | 45 min |
-| M5: Event API | Server | 45 min |
-| M6: Wire Interactions | Client | 30 min |
-| M7: Entity API | Server | 30 min |
-| M8: Entity Management | Client | 30 min |
-| M9: Event Management | Client | 45 min |
-| M10: Search | Both | 30 min |
-| M11: User Pages | Client | 30 min |
-| M12: Polish | Both | ∞ |
+| Milestone | Track | Time | Status |
+|-----------|-------|------|--------|
+| M0: Setup | Both | 15 min | ✅ Done |
+| M1: Database | Server | 30 min | ✅ Done |
+| M2: Auth | Client | 30 min | |
+| M3: Map | Client | 60 min | |
+| M4: Event/Entity Pages | Client | 45 min | |
+| M5: Event API | Server | 45 min | ✅ Done |
+| M6: Wire Interactions | Client | 30 min | |
+| M7: Entity API | Server | 30 min | ✅ Done |
+| M8: Entity Management | Client | 30 min | |
+| M9: Event Management | Client | 45 min | |
+| M10: Search | Both | 30 min | 🟡 Server Done |
+| M11: User Pages | Client | 30 min | |
+| M12: Polish | Both | ∞ | |
 
 **Total estimated time:** ~6-7 hours (aggressive but doable for a hackathon!)
+
+### 🎉 Server Track Complete!
+All server-side API routes implemented: **16 endpoints** across events, entities, and search.
 
 ---
 
