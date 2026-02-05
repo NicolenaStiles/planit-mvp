@@ -1,101 +1,164 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useMemo } from "react";
+import { Box, Typography, Paper, Chip, Stack } from "@mui/material";
+import {
+  CalendarMonth as CalendarIcon,
+  LocationOn as LocationIcon,
+} from "@mui/icons-material";
+import Link from "next/link";
+import dayjs, { Dayjs } from "dayjs";
+import { mockEvents } from "@/data/mockEvents";
+import Map from "@/components/Map";
+import EventFilters from "@/components/Map/EventFilters";
+import { useGeolocation } from "@/hooks/useGeolocation";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const { latitude, longitude, loading: geoLoading } = useGeolocation();
+  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(dayjs());
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const handleTagToggle = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  // Filter events based on selected date and tags
+  const filteredEvents = useMemo(() => {
+    return mockEvents.filter((event) => {
+      // Date filter
+      if (selectedDate) {
+        const eventDate = dayjs(event.starts_at);
+        if (!eventDate.isSame(selectedDate, "day")) {
+          return false;
+        }
+      }
+
+      // Tag filter
+      if (selectedTags.length > 0) {
+        const hasMatchingTag = event.tags.some((tag) =>
+          selectedTags.includes(tag)
+        );
+        if (!hasMatchingTag) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [selectedDate, selectedTags]);
+
+  // Default center (Charlotte, NC) or user's location
+  const mapCenter: [number, number] = [
+    latitude ?? 35.2271,
+    longitude ?? -80.8431,
+  ];
+
+  return (
+    <Box sx={{ height: "calc(100vh - 64px)", display: "flex", flexDirection: "column" }}>
+      {/* Filters */}
+      <Box sx={{ p: 2, pb: 0 }}>
+        <EventFilters
+          selectedDate={selectedDate}
+          onDateChange={setSelectedDate}
+          selectedTags={selectedTags}
+          onTagToggle={handleTagToggle}
+        />
+      </Box>
+
+      {/* Map and Event List */}
+      <Box sx={{ flex: 1, display: "flex", flexDirection: { xs: "column", md: "row" }, p: 2, gap: 2, minHeight: 0 }}>
+        {/* Map */}
+        <Paper
+          sx={{
+            flex: { xs: "0 0 300px", md: 2 },
+            minHeight: { xs: 300, md: 0 },
+            overflow: "hidden",
+          }}
+          elevation={2}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          {!geoLoading && (
+            <Map events={filteredEvents} center={mapCenter} zoom={13} />
+          )}
+        </Paper>
+
+        {/* Event List */}
+        <Box
+          sx={{
+            flex: 1,
+            overflow: "auto",
+            minHeight: { xs: 200, md: 0 },
+          }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <Typography variant="h6" gutterBottom fontWeight={600} sx={{ px: 1 }}>
+            {filteredEvents.length === 0
+              ? "No events found"
+              : `${filteredEvents.length} event${filteredEvents.length !== 1 ? "s" : ""}`}
+          </Typography>
+          <Stack spacing={2}>
+            {filteredEvents.map((event) => (
+              <Paper
+                key={event.id}
+                component={Link}
+                href={`/events/${event.slug}`}
+                sx={{
+                  p: 2,
+                  display: "block",
+                  textDecoration: "none",
+                  color: "inherit",
+                  transition: "box-shadow 0.2s",
+                  "&:hover": {
+                    boxShadow: 4,
+                  },
+                }}
+              >
+                <Typography variant="subtitle1" fontWeight={600} gutterBottom>
+                  {event.title}
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                    mb: 1,
+                    color: "text.secondary",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <CalendarIcon fontSize="small" />
+                    <Typography variant="body2">
+                      {new Date(event.starts_at).toLocaleDateString("en-US", {
+                        weekday: "short",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                    <LocationIcon fontSize="small" />
+                    <Typography variant="body2" noWrap>
+                      {event.address}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Box sx={{ display: "flex", gap: 0.5, flexWrap: "wrap" }}>
+                  {event.tags.map((tag) => (
+                    <Chip
+                      key={tag}
+                      label={tag}
+                      size="small"
+                      variant="outlined"
+                    />
+                  ))}
+                </Box>
+              </Paper>
+            ))}
+          </Stack>
+        </Box>
+      </Box>
+    </Box>
   );
 }
