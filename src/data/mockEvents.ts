@@ -105,3 +105,11 @@ export const mockEvents: MockEvent[] = [
     ],
   },
 ];
+
+export function getEventBySlug(slug: string): MockEvent | undefined {
+  return mockEvents.find((e) => e.slug === slug);
+}
+
+export function getEventsByEntity(entityId: string): MockEvent[] {
+  return mockEvents.filter((e) => e.hosts.some((h) => h.id === entityId));
+}
