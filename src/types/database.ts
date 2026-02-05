@@ -373,6 +373,30 @@ export interface Database {
         };
         Returns: Event[];
       };
+      search_events_within_radius: {
+        Args: {
+          search_term: string;
+          lat: number;
+          lng: number;
+          radius_meters: number;
+          start_date: string;
+          end_date: string | null;
+          tag_filter: string[] | null;
+          result_limit: number;
+        };
+        Returns: Event[];
+      };
+      search_entities_within_radius: {
+        Args: {
+          search_term: string;
+          lat: number;
+          lng: number;
+          radius_meters: number;
+          entity_type: EntityType | null;
+          result_limit: number;
+        };
+        Returns: Entity[];
+      };
     };
     Enums: {
       entity_type: EntityType;
