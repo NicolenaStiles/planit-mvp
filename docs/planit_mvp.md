@@ -439,41 +439,41 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 2: Auth Flow (Client Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] Supabase Auth setup with SSR helpers
-- [ ] Login page with email/password
-- [ ] Sign up page
-- [ ] Auth context/provider
-- [ ] Protected route middleware
-- [ ] Basic layout with header (logo, nav, login/profile button)
+- [x] Supabase Auth setup with SSR helpers
+- [x] Login page with email/password
+- [x] Sign up page
+- [x] Auth context/provider
+- [x] Protected route middleware
+- [x] Basic layout with header (logo, nav, login/profile button)
 
 ---
 
 ### Milestone 3: Map & Event Discovery (Client Track)
-**Time estimate:** 1 hour
+**Time estimate:** 1 hour — ✅ COMPLETE
 
-- [ ] Map component with React-Leaflet
-- [ ] Geolocation hook (get user's position)
-- [ ] Fetch events within map bounds
-- [ ] Event markers with clustering
-- [ ] Date picker for filtering
-- [ ] Tag filter chips
-- [ ] Event preview card on marker click
-- [ ] Link to full event page
+- [x] Map component with React-Leaflet
+- [x] Geolocation hook (get user's position)
+- [x] Fetch events within map bounds
+- [x] Event markers with clustering
+- [x] Date picker for filtering
+- [x] Tag filter chips
+- [x] Event preview card on marker click
+- [x] Link to full event page
 
 ---
 
 ### Milestone 4: Event & Entity Pages (Client Track)
-**Time estimate:** 45 minutes
+**Time estimate:** 45 minutes — ✅ COMPLETE
 
-- [ ] Event detail page layout
-- [ ] Entity page layout
-- [ ] Updates timeline component
-- [ ] RSVP buttons (UI only, wire up in M6)
-- [ ] Save button (UI only)
-- [ ] Share button (copy link + navigator.share)
-- [ ] Contact organizers modal/form (UI only)
+- [x] Event detail page layout
+- [x] Entity page layout
+- [x] Updates timeline component
+- [x] RSVP buttons (UI only, wire up in M6)
+- [x] Save button (UI only)
+- [x] Share button (copy link + navigator.share)
+- [x] Contact organizers modal/form (UI only)
 
 ---
 
@@ -493,13 +493,13 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 6: Wire Up Event Interactions (Client Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] Connect RSVP buttons to API
-- [ ] Connect Save button to API
-- [ ] Connect Contact form to API
-- [ ] Show user's current RSVP/save state
-- [ ] Optimistic UI updates
+- [x] Connect RSVP buttons to API
+- [x] Connect Save button to API
+- [x] Connect Contact form to API
+- [x] Show user's current RSVP/save state
+- [x] Optimistic UI updates
 
 ---
 
@@ -515,51 +515,51 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 ---
 
 ### Milestone 8: Entity Management (Client Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] Create entity form
-- [ ] Manage entity page
-- [ ] Follow/unfollow button on entity pages
-- [ ] "My Entities" list on profile
+- [x] Create entity form
+- [x] Manage entity page
+- [x] Follow/unfollow button on entity pages
+- [x] "My Entities" list on profile
 
 ---
 
 ### Milestone 9: Event Creation & Management (Client Track)
-**Time estimate:** 45 minutes
+**Time estimate:** 45 minutes — ✅ COMPLETE
 
-- [ ] Create event form with:
+- [x] Create event form with:
   - Address input with geocoding (use Nominatim or Supabase edge function)
   - Date/time pickers
   - Tag selection
   - Multi-host selection
   - Banner upload to Supabase Storage
-- [ ] Manage event page
-- [ ] Post update form
-- [ ] Auto-update display in timeline
+- [x] Manage event page
+- [x] Post update form
+- [x] Auto-update display in timeline
 
 ---
 
 ### Milestone 10: Search (Both Tracks)
-**Time estimate:** 30 minutes — 🟡 SERVER COMPLETE
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
 **Server:** ✅
 - [x] `GET /api/search` with Postgres full-text search on events + entities
 - [x] Filter by tags, date range, location radius
 
-**Client:**
-- [ ] Search bar in header
-- [ ] Search results page
-- [ ] Integrate with map view (search → pan to results)
+**Client:** ✅
+- [x] Search bar in header
+- [x] Search results page
+- [ ] Integrate with map view (search → pan to results) *(deferred to polish)*
 
 ---
 
 ### Milestone 11: Calendar & User Pages (Client Track)
-**Time estimate:** 30 minutes
+**Time estimate:** 30 minutes — ✅ COMPLETE
 
-- [ ] Calendar page showing RSVP'd + saved events
-- [ ] Profile page with username edit
-- [ ] Settings page (placeholder)
-- [ ] Inbox page for organizer messages
+- [x] Calendar page showing RSVP'd + saved events
+- [x] Profile page with username edit
+- [x] Settings page (placeholder)
+- [x] Inbox page for organizer messages
 
 ---
 
@@ -579,22 +579,23 @@ Designed for parallel development: **Client** and **Server** tracks can run simu
 |-----------|-------|------|--------|
 | M0: Setup | Both | 15 min | ✅ Done |
 | M1: Database | Server | 30 min | ✅ Done |
-| M2: Auth | Client | 30 min | |
-| M3: Map | Client | 60 min | |
-| M4: Event/Entity Pages | Client | 45 min | |
+| M2: Auth | Client | 30 min | ✅ Done |
+| M3: Map | Client | 60 min | ✅ Done |
+| M4: Event/Entity Pages | Client | 45 min | ✅ Done |
 | M5: Event API | Server | 45 min | ✅ Done |
-| M6: Wire Interactions | Client | 30 min | |
+| M6: Wire Interactions | Client | 30 min | ✅ Done |
 | M7: Entity API | Server | 30 min | ✅ Done |
-| M8: Entity Management | Client | 30 min | |
-| M9: Event Management | Client | 45 min | |
-| M10: Search | Both | 30 min | 🟡 Server Done |
-| M11: User Pages | Client | 30 min | |
-| M12: Polish | Both | ∞ | |
+| M8: Entity Management | Client | 30 min | ✅ Done |
+| M9: Event Management | Client | 45 min | ✅ Done |
+| M10: Search | Both | 30 min | ✅ Done |
+| M11: User Pages | Client | 30 min | ✅ Done |
+| M12: Polish | Both | ∞ | 🟡 In Progress |
 
 **Total estimated time:** ~6-7 hours (aggressive but doable for a hackathon!)
 
-### 🎉 Server Track Complete!
-All server-side API routes implemented: **16 endpoints** across events, entities, and search.
+### 🎉 Both Tracks Complete!
+- **Server Track:** All 16 API endpoints implemented across events, entities, and search.
+- **Client Track:** All pages and features implemented through M11.
 
 ---
 
@@ -660,4 +661,4 @@ TIME    SERVER TRACK                 CLIENT TRACK
 
 ---
 
-*Last updated: Pre-flight LAX → CLT hackathon*
+*Last updated: M0-M11 complete, ready for M12 polish*
