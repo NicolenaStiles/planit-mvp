@@ -19,6 +19,7 @@ import {
   Map as MapIcon,
   CalendarMonth as CalendarIcon,
   Search as SearchIcon,
+  Add as AddIcon,
 } from "@mui/icons-material";
 import { useAuth } from "@/components/providers/AuthProvider";
 
@@ -84,15 +85,27 @@ export default function Header() {
             Search
           </Button>
           {user && (
-            <Button
-              component={Link}
-              href="/calendar"
-              color="inherit"
-              startIcon={<CalendarIcon />}
-              sx={{ display: { xs: "none", sm: "flex" } }}
-            >
-              My Events
-            </Button>
+            <>
+              <Button
+                component={Link}
+                href="/calendar"
+                color="inherit"
+                startIcon={<CalendarIcon />}
+                sx={{ display: { xs: "none", sm: "flex" } }}
+              >
+                My Events
+              </Button>
+              <Button
+                component={Link}
+                href="/events/new"
+                color="primary"
+                variant="contained"
+                startIcon={<AddIcon />}
+                sx={{ display: { xs: "none", sm: "flex" } }}
+              >
+                Create Event
+              </Button>
+            </>
           )}
         </Box>
 
@@ -144,6 +157,20 @@ export default function Header() {
                     onClick={handleMenuClose}
                   >
                     My Events
+                  </MenuItem>
+                  <MenuItem
+                    component={Link}
+                    href="/events/new"
+                    onClick={handleMenuClose}
+                  >
+                    Create Event
+                  </MenuItem>
+                  <MenuItem
+                    component={Link}
+                    href="/entities/new"
+                    onClick={handleMenuClose}
+                  >
+                    Create Organization
                   </MenuItem>
                   <MenuItem
                     component={Link}

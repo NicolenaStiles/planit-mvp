@@ -17,7 +17,9 @@ import {
   LocationOn as LocationIcon,
   AccessTime as TimeIcon,
   ArrowBack as BackIcon,
+  Settings as ManageIcon,
 } from "@mui/icons-material";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { getEventBySlug } from "@/data/mockEvents";
 import { getUpdatesForEvent } from "@/data/mockUpdates";
 import RSVPButtons from "@/components/Event/RSVPButtons";
@@ -31,6 +33,7 @@ interface PageProps {
 
 export default function EventPage({ params }: PageProps) {
   const { slug } = use(params);
+  const { user } = useAuth();
   const event = getEventBySlug(slug);
 
   if (!event) {
@@ -83,7 +86,18 @@ export default function EventPage({ params }: PageProps) {
         <Typography variant="h4" component="h1" fontWeight={700}>
           {event.title}
         </Typography>
-        <Box>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          {user && (
+            <Button
+              component={Link}
+              href={`/events/${event.slug}/manage`}
+              variant="outlined"
+              size="small"
+              startIcon={<ManageIcon />}
+            >
+              Manage
+            </Button>
+          )}
           <ActionButtons
             eventId={event.id}
             eventTitle={event.title}
