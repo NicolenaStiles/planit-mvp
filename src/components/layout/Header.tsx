@@ -204,6 +204,13 @@ export default function Header() {
                   </MenuItem>
                   <MenuItem
                     component={Link}
+                    href="/inbox"
+                    onClick={handleMenuClose}
+                  >
+                    Inbox
+                  </MenuItem>
+                  <MenuItem
+                    component={Link}
                     href="/settings"
                     onClick={handleMenuClose}
                   >
