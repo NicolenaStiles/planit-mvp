@@ -14,6 +14,7 @@ import {
   MenuItem,
   Box,
   Divider,
+  InputBase,
 } from "@mui/material";
 import {
   Map as MapIcon,
@@ -27,6 +28,15 @@ export default function Header() {
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery("");
+    }
+  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -75,15 +85,35 @@ export default function Header() {
           >
             Explore
           </Button>
-          <Button
+          <Box
+            component="form"
+            onSubmit={handleSearch}
+            sx={{
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              bgcolor: "action.hover",
+              borderRadius: 1,
+              px: 1.5,
+              py: 0.5,
+              mr: 2,
+            }}
+          >
+            <SearchIcon sx={{ color: "text.secondary", mr: 1 }} />
+            <InputBase
+              placeholder="Search events..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              sx={{ width: 180 }}
+            />
+          </Box>
+          <IconButton
             component={Link}
             href="/search"
             color="inherit"
-            startIcon={<SearchIcon />}
-            sx={{ display: { xs: "none", sm: "flex" } }}
+            sx={{ display: { xs: "flex", md: "none" } }}
           >
-            Search
-          </Button>
+            <SearchIcon />
+          </IconButton>
           {user && (
             <>
               <Button
